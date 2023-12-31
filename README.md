@@ -38,6 +38,8 @@ https://www.youtube.com/watch?v=akSBP4fwgjg
 npm install -DE @jazzer.js/jest-runner
 ```
 
+(Or with [`yarn`](https://github.com/hchiam/learning-yarn): `yarn add --dev @jazzer.js/jest-runner`)
+
 You can fuzz test [FuzzTarget.js](https://github.com/hchiam/learning-jazzer/blob/main/FuzzTarget.js) by making jest run the fuzz test file [FuzzTarget.fuzz.js](https://github.com/hchiam/learning-jazzer/blob/main/FuzzTarget.fuzz.js)
 
 Make sure you also set up the following fuzz and jest options in your [package.json](https://github.com/hchiam/learning-jazzer/blob/main/package.json):
