@@ -47,8 +47,9 @@ Make sure you also set up the following fuzz and jest options in your [package.j
 ```json
 {
   "scripts": {
-    "fuzz": "JAZZER_FUZZ=1 jest --testNamePattern=\"fuzz\"",
-    "fuzz_regression": "JAZZER_FUZZ=0 jest --testNamePattern=\"fuzz\"", // checks against previously-found failures since jazzer stores bugs it found earlier
+    "fuzz": "JAZZER_FUZZ=1 jest --testRunner=\"@jazzer.js/jest-runner\" --testMatch=\"<rootDir>/**/*.fuzz.js\"",
+    "fuzz_regression": "JAZZER_FUZZ=0 jest --testRunner=\"@jazzer.js/jest-runner\" --testMatch=\"<rootDir>/**/*.fuzz.js\"",
+    // checks against previously-found failures since jazzer stores bugs it found earlier
     "test": "jest --bail --findRelatedTests *.test.js", // for NON-fuzz tests. or for both test and fuzz: jest --testPathMatch=\"integration.test.js\"
     ...
   },
@@ -77,8 +78,8 @@ Or just: (to only run fuzz tests when you want)
 ```json
 {
   "scripts": {
-    "fuzz": "JAZZER_FUZZ=1 jest *.fuzz.js",
-    "fuzz_regression": "JAZZER_FUZZ=0 jest *.fuzz.js",
+    "fuzz": "JAZZER_FUZZ=1 jest --testRunner=\"@jazzer.js/jest-runner\" --testMatch=\"<rootDir>/**/*.fuzz.js\"",
+    "fuzz_regression": "JAZZER_FUZZ=0 jest --testRunner=\"@jazzer.js/jest-runner\" --testMatch=\"<rootDir>/**/*.fuzz.js\"",
   ...
   },
   ...
