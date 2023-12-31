@@ -1,47 +1,82 @@
-# Learning template [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/hchiam/learning-template/blob/main/LICENSE)
+# Learning Jazzer
 
 Just one of the things I'm learning. https://github.com/hchiam/learning
 
-(To use this template fast with [`gh` CLI](https://github.com/hchiam/learning-gh), you can run [`gh repo create --template learning-template learning-...`](https://cli.github.com/manual/gh_repo_create) or [set up a custom shortcut CLI command](https://github.com/hchiam/learning-bash-scripts/blob/main/gh-cli-create-learning-repo-from-template.sh).)
+[Jazzer.js](https://github.com/CodeIntelligenceTesting/jazzer.js) ([Jazzer](https://github.com/CodeIntelligenceTesting/jazzer)) for fuzzing, AKA fuzz testing.
 
-(To create a convenience script repo, use this template instead: https://github.com/hchiam/convenience)
+## With node.js
 
-(To create a website fast, use a code generator like [`create-next-app`](https://github.com/hchiam/learning-nextjs), [`sapper`](https://github.com/hchiam/learning-sapper), a [svelte template](https://github.com/sveltejs/template), [`yo`](https://yeoman.io/generators), or my [project-template](https://github.com/hchiam/project-template))
+https://www.youtube.com/watch?v=KyIhxEiNnfc
 
-(Use the redirect template https://github.com/hchiam/learning-redirect to enhance discoverability. Or [set up a custom shortcut CLI command](https://github.com/hchiam/learning-bash-scripts/blob/main/gh-cli-create-learning-redirect-repo-from-template.sh))
-
-<!-- Add reference link(s) here -->
-
-## From scratch
-
-Using [`yarn`](https://github.com/hchiam/learning-yarn):
-
-```bash
-yarn add
+```sh
+npm install -DE @jazzer.js/core
 ```
 
-Or with `npm`:
+You can fuzz test FuzzTarget.js directly in the CLI:
 
-```bash
-npm install
+```sh
+npx jazzer FuzzTarget
 ```
 
-And then:
+```sh
+# npx jazzer FuzzTarget crash-s0m3cr4sh5tr1ng1d # Base64 code to reproduce a specific error
 
-```bash
+# still triggers ==54827== Uncaught Exception after Running:
+npx jazzer FuzzTarget crash-eff8ec10351afe6a12d58df3e9c71e363a37ee55
 
+# this one no longer shows error after Running:
+npx jazzer FuzzTarget crash-ca6ca17b1b8bc4b9e134f498f97a406593824b90
 ```
 
-## Starting by testing out this repo <!-- Replace "template"s and "# and then ..."s in this section -->
+## and with [jest](https://github.com/hchiam/learning-jest)
 
-Using [`yarn`](https://github.com/hchiam/learning-yarn): (triple-click to select all)
+https://www.youtube.com/watch?v=akSBP4fwgjg
 
-```bash
-git clone https://github.com/hchiam/learning-template.git && cd learning-template && yarn; # and then ...
+```sh
+npm install -DE @jazzer.js/jest-runner
 ```
 
-Or with `npm`: (triple-click to select all)
+You can fuzz test FuzzTarget.js with jest test FuzzTarget.fuzz.js and the following fuzz and jest options in your package.json:
 
-```bash
-git clone https://github.com/hchiam/learning-template.git && cd learning-template && npm install; # and then ...
+```json
+{
+  "scripts": {
+    "fuzz": "JAZZER_FUZZ=1 jest --testNamePattern=\"fuzz\"",
+    "fuzz_regression": "JAZZER_FUZZ=0 jest --testNamePattern=\"fuzz\"", // checks against previously-found failures since jazzer stores bugs it found earlier
+    "test": "jest --bail --findRelatedTests *.test.js", // for NON-fuzz tests. or for both test and fuzz: jest --testPathMatch=\"integration.test.js\"
+    ...
+  },
+  ...
+  "jest": {
+    "projects": [
+      {
+        "displayName": "test"
+      },
+      {
+        "testRunner": "@jazzer.js/jest-runner",
+        "displayName": {
+          "name": "Jazzer.js",
+          "color": "cyan"
+        },
+        "testMatch": ["<rootDir>/**/*.fuzz.js"]
+      }
+    ]
+  },
+  ...
+}
+```
+
+```sh
+npm run fuzz
+```
+
+```sh
+# check against previously-found failures since jazzer stores bugs it found earlier:
+npm run fuzz_regression
+```
+
+```sh
+# for NON-fuzz tests:
+npm run test
+# or for both test and fuzz: jest --testPathMatch=\"integration.test.js\"
 ```
