@@ -12,18 +12,20 @@ https://www.youtube.com/watch?v=KyIhxEiNnfc
 npm install -DE @jazzer.js/core
 ```
 
-You can fuzz test FuzzTarget.js directly in the CLI:
+You can fuzz test [FuzzTarget.js](https://github.com/hchiam/learning-jazzer/blob/main/FuzzTarget.js) directly in the CLI with:
 
 ```sh
-npx jazzer FuzzTarget
+npx jazzer FuzzTarget.js
+```
+
+Use the Base64 code to reproduce a specific error, like `npx jazzer FuzzTarget crash-s0m3cr4sh5tr1ng1d`:
+
+```sh
+# still triggers ==54827== Uncaught Exception after Running:
+npx jazzer FuzzTarget crash-eff8ec10351afe6a12d58df3e9c71e363a37ee55
 ```
 
 ```sh
-# npx jazzer FuzzTarget crash-s0m3cr4sh5tr1ng1d # Base64 code to reproduce a specific error
-
-# still triggers ==54827== Uncaught Exception after Running:
-npx jazzer FuzzTarget crash-eff8ec10351afe6a12d58df3e9c71e363a37ee55
-
 # this one no longer shows error after Running:
 npx jazzer FuzzTarget crash-ca6ca17b1b8bc4b9e134f498f97a406593824b90
 ```
@@ -36,7 +38,9 @@ https://www.youtube.com/watch?v=akSBP4fwgjg
 npm install -DE @jazzer.js/jest-runner
 ```
 
-You can fuzz test FuzzTarget.js with jest test FuzzTarget.fuzz.js and the following fuzz and jest options in your package.json:
+You can fuzz test [FuzzTarget.js](https://github.com/hchiam/learning-jazzer/blob/main/FuzzTarget.js) by making jest run the fuzz test file [FuzzTarget.fuzz.js](https://github.com/hchiam/learning-jazzer/blob/main/FuzzTarget.fuzz.js)
+
+Make sure you also set up the following fuzz and jest options in your [package.json](https://github.com/hchiam/learning-jazzer/blob/main/package.json):
 
 ```json
 {
@@ -65,6 +69,8 @@ You can fuzz test FuzzTarget.js with jest test FuzzTarget.fuzz.js and the follow
   ...
 }
 ```
+
+Now you can run the following:
 
 ```sh
 npm run fuzz
