@@ -53,7 +53,7 @@ Make sure you also set up the following fuzz and jest options in your [package.j
     ...
   },
   ...
-  "jest": {
+  "jest": { // the following makes running jest also auto-run the jest .fuzz tests:
     "projects": [
       {
         "displayName": "test"
@@ -72,7 +72,7 @@ Make sure you also set up the following fuzz and jest options in your [package.j
 }
 ```
 
-Or just:
+Or just: (to only run fuzz tests when you want)
 
 ```json
 {
