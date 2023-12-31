@@ -30,7 +30,7 @@ npx jazzer FuzzTarget crash-eff8ec10351afe6a12d58df3e9c71e363a37ee55
 npx jazzer FuzzTarget crash-ca6ca17b1b8bc4b9e134f498f97a406593824b90
 ```
 
-## and with [jest](https://github.com/hchiam/learning-jest)
+## Or with [jest](https://github.com/hchiam/learning-jest)
 
 https://www.youtube.com/watch?v=akSBP4fwgjg
 
