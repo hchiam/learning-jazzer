@@ -1,4 +1,4 @@
-# Learning Jazzer
+# Learning Jazzer (for fuzz testing)
 
 Just one of the things I'm learning. https://github.com/hchiam/learning
 
