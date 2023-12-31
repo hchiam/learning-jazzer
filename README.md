@@ -72,6 +72,19 @@ Make sure you also set up the following fuzz and jest options in your [package.j
 }
 ```
 
+Or just:
+
+```json
+{
+  "scripts": {
+    "fuzz": "JAZZER_FUZZ=1 jest *.fuzz.js",
+    "fuzz_regression": "JAZZER_FUZZ=0 jest *.fuzz.js",
+  ...
+  },
+  ...
+}
+```
+
 Now you can run the following:
 
 ```sh
